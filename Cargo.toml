@@ -1,0 +1,15 @@
+[package]
+name = "api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = { version = "4.3.1", features = ["macros"] }
+diesel = { version = "2.1.0", features = ["postgres", "postgres_backend", "r2d2", "uuid"] }
+dotenvy = "0.15.7"
+r2d2 = "0.8.10"
+serde = { version = "1.0.179", features = ["derive"] }
+thiserror = "1.0.44"
+uuid = { version = "1.4.1", features = ["serde", "v4"] }
