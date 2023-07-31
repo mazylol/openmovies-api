@@ -13,9 +13,6 @@ DROP TABLE IF EXISTS "cast";
 -- Drop Table: Genre
 DROP TABLE IF EXISTS genre;
 
--- Drop Table: Movies
-DROP TABLE IF EXISTS movies;
-
 -- Drop Table: Runtime
 DROP TABLE IF EXISTS runtime;
 
@@ -24,3 +21,6 @@ DROP TABLE IF EXISTS release;
 
 -- Drop Table: BoxOffice
 DROP TABLE IF EXISTS boxoffice;
+
+-- Drop Table: Movies
+DROP TABLE IF EXISTS movies;

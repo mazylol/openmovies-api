@@ -1,10 +1,15 @@
 pub mod models;
 pub mod schema;
+pub mod api;
 
+use diesel::RunQueryDsl;
 use diesel::pg::PgConnection;
 use diesel::r2d2::ConnectionManager;
 use dotenvy::dotenv;
+use models::Movies;
 use std::env;
+
+use crate::schema::movies::dsl::movies;
 
 pub type DBPool = r2d2::Pool<ConnectionManager<PgConnection>>;
 
@@ -21,5 +26,11 @@ impl Database {
             .build(manager)
             .expect("Failed to create pool.");
         Database { pool }
+    }
+
+    pub fn get_movies(&self) -> Vec<Movies> {
+        movies
+            .load::<Movies>(&mut self.pool.get().unwrap())
+            .expect("Error loading all todos")
     }
 }

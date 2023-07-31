@@ -1,5 +1,9 @@
+pub mod models;
+pub mod schema;
+pub mod api;
+
 use actix_web::{HttpServer, App, web, Responder, get, HttpResponse};
-use api::Database;
+use ::api::Database;
 use serde::Serialize;
 
 #[derive(Serialize)]
@@ -30,6 +34,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .app_data(app_data.clone())
+            .service(api::get_movies)
             .service(healthcheck)
             .default_service(web::route().to(not_found))
             .wrap(actix_web::middleware::Logger::default())

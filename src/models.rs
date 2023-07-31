@@ -1,4 +1,5 @@
 use diesel::prelude::*;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Queryable, Selectable)]
@@ -60,7 +61,7 @@ pub struct Genre {
     pub genre_name: String,
 }
 
-#[derive(Queryable, Selectable)]
+#[derive(Serialize, Deserialize, Debug, Clone, Queryable, Insertable, AsChangeset)]
 #[diesel(table_name = crate::schema::movies)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct Movies {
