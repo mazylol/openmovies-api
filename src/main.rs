@@ -1,10 +1,9 @@
-pub mod models;
-pub mod schema;
-pub mod api;
-
-use actix_web::{HttpServer, App, web, Responder, get, HttpResponse};
-use ::api::Database;
+use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use serde::Serialize;
+
+mod api;
+mod models;
+mod repository;
 
 #[derive(Serialize)]
 pub struct Response {
@@ -14,7 +13,7 @@ pub struct Response {
 #[get("/health")]
 async fn healthcheck() -> impl Responder {
     let response = Response {
-        message: "Everything is working fine".to_string()
+        message: "Everything is working fine".to_string(),
     };
     HttpResponse::Ok().json(response)
 }
@@ -28,13 +27,13 @@ async fn not_found() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let db = Database::new();
+    let db = repository::database::Database::new();
     let app_data = web::Data::new(db);
 
     HttpServer::new(move || {
         App::new()
             .app_data(app_data.clone())
-            .service(api::get_movies)
+            .configure(api::api::config)
             .service(healthcheck)
             .default_service(web::route().to(not_found))
             .wrap(actix_web::middleware::Logger::default())
