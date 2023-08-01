@@ -11,15 +11,15 @@ diesel::table! {
         rating -> Varchar,
         #[max_length = 50]
         language -> Varchar,
-        #[max_length = 10]
+        #[max_length = 15]
         box_office_budget -> Varchar,
-        #[max_length = 10]
+        #[max_length = 15]
         box_office_gross_us -> Varchar,
-        #[max_length = 10]
+        #[max_length = 15]
         box_office_gross_worldwide -> Varchar,
-        #[max_length = 10]
+        #[max_length = 15]
         box_office_opening_weekend_us -> Varchar,
-        #[max_length = 10]
+        #[max_length = 15]
         box_office_opening_weekend_worldwide -> Varchar,
         release_year -> Int4,
         release_month -> Int4,
